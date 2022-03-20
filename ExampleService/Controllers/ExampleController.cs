@@ -21,7 +21,7 @@ namespace ExampleService.Controllers
         #endregion Constructors
 
         [HttpPost("CreateUser")]
-        public ActionResult CreateUser(UserDto userModel)
+        public ActionResult CreateUser([FromBody] UserDto userModel)
         {
             User newUser = new User
             {
@@ -35,10 +35,11 @@ namespace ExampleService.Controllers
         }
 
         [HttpDelete("DeleteUser")]
-        public ActionResult DeleteUser(UserDto userModel)
+        public ActionResult DeleteUser([FromBody] UserDto userModel)
         {
             User userToDelete = new User
             {
+                UserID = userModel.UserID,
                 Name = userModel.Name,
                 UserName = userModel.UserName,
                 Email = userModel.Email,
