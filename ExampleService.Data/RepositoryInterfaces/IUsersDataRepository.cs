@@ -10,5 +10,7 @@ namespace ExampleService.Data.RepositoryInterfaces
         User GetModel(Int32 userID);
 
         Boolean SaveModel(User userModel);
+
+        Boolean RemoveModel(User userModel);        
     }
 }

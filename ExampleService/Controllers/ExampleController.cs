@@ -34,6 +34,20 @@ namespace ExampleService.Controllers
             return Ok(_usersDataRepository.SaveModel(newUser));
         }
 
+        [HttpDelete("DeleteUser")]
+        public ActionResult DeleteUser(UserDto userModel)
+        {
+            User userToDelete = new User
+            {
+                Name = userModel.Name,
+                UserName = userModel.UserName,
+                Email = userModel.Email,
+                Phone = userModel.Phone
+            };
+
+            return Ok(_usersDataRepository.RemoveModel(userToDelete));
+        }
+
         [HttpGet("GetUsers")]
         public ActionResult GetUsers()
         {            

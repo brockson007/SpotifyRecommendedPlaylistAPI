@@ -1,5 +1,6 @@
 ﻿using ExampleService.Data.Models;
 using ExampleService.Data.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +38,43 @@ namespace ExampleService.Data.Repositories
 
         public Boolean SaveModel(User userModel)
         {
-            Boolean returnValue = false;
+            _dbContext.Users.Attach(userModel);
+
+            if (userModel.UserID == 0)
+            {
+                #region Pre Preserve SetObjectStateAdded
+                #endregion Pre Preserve SetObjectStateAdded
+
+                _dbContext.Entry(userModel).State = EntityState.Added;
+
+                #region Post Preserve SetObjectStateAdded
+                #endregion Post Preserve SetObjectStateAdded
+            }
+            else
+            {
+                #region Pre Preserve SetObjectStateModified
+                #endregion Pre Preserve SetObjectStateModified
+
+                _dbContext.Entry(userModel).State = EntityState.Modified;
+
+                #region Post Preserve SetObjectStateModified
+                #endregion Post Preserve SetObjectStateModified
+            }
 
             _dbContext.SaveChanges();
 
-            return returnValue;
+            return true;
+        }
+
+        public Boolean RemoveModel(User userModel)
+        {
+            _dbContext.Users.Attach(userModel);
+           
+            _dbContext.Users.Remove(userModel);
+   
+            _dbContext.SaveChanges();
+
+            return true;
         }
     }
 }
