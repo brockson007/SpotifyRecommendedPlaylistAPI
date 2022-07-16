@@ -21,4 +21,9 @@
     <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Views\" />
+    <Folder Include="Migrations\StoredProcedures\" />
+  </ItemGroup>
+
 </Project>

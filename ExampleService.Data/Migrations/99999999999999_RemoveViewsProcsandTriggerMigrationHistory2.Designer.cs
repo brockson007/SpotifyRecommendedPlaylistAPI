@@ -3,6 +3,7 @@ using ExampleService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExampleService.Data.Migrations
 {
     [DbContext(typeof(ExampleServiceDataContext))]
-    partial class ExampleServiceDataContextModelSnapshot : ModelSnapshot
+    [Migration("99999999999999_RemoveViewsProcsandTriggerMigrationHistory2")]
+    partial class RemoveViewsProcsandTriggerMigrationHistory2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
