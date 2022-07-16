@@ -29,17 +29,16 @@ builder.Services.AddSwaggerGen(x =>
     x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
 });
 
+builder.Services.AddSwaggerGenNewtonsoftSupport();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(s =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(s =>
-    {
-        s.SwaggerEndpoint("/swagger/v1/swagger.json", "ExampleService");
-    });
-}
+    s.SwaggerEndpoint("/swagger/v1/swagger.json", "ExampleService");
+    s.RoutePrefix = "";
+});
 
 app.UseHttpsRedirection();
 
