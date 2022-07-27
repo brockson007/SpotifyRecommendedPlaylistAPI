@@ -33,6 +33,15 @@ builder.Services.AddSwaggerGenNewtonsoftSupport();
 
 var app = builder.Build();
 
+// This runs migrations each time the service is ran
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ExampleServiceDataContext>();
+           
+    dataContext.Database.Migrate();
+    
+}
+
 app.UseSwagger();
 app.UseSwaggerUI(s =>
 {
