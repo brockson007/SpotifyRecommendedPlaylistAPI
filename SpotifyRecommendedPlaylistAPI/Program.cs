@@ -6,10 +6,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Serilog;
 using System.IO;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Serilog.Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File(path: @$"Logs\SpotifyRecommendedPlaylistAPI.log", 
+                  rollingInterval: RollingInterval.Day,
+                  rollOnFileSizeLimit: true,
+                  fileSizeLimitBytes: 5000000)  
+    .CreateLogger();
 
 // Add services to the container.
 
@@ -30,17 +40,19 @@ builder.Services.AddSwaggerGen(x =>
 });
 
 builder.Services.AddSwaggerGenNewtonsoftSupport();
+builder.Host.UseSerilog();
+
 
 var app = builder.Build();
 
 // This runs migrations each time the service is ran
-using (var scope = app.Services.CreateScope())
-{
-    var dataContext = scope.ServiceProvider.GetRequiredService<SpotifyRecommendedPlaylistAPIDataContext>();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dataContext = scope.ServiceProvider.GetRequiredService<SpotifyRecommendedPlaylistAPIDataContext>();
            
-    dataContext.Database.Migrate();
+//    dataContext.Database.Migrate();
     
-}
+//}
 
 app.UseSwagger();
 app.UseSwaggerUI(s =>
