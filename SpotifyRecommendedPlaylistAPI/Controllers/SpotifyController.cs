@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net.Http;
+using System.Text;
 
 namespace SpotifyRecommendedPlaylistAPI.Controllers
 {
@@ -6,20 +9,27 @@ namespace SpotifyRecommendedPlaylistAPI.Controllers
     [ApiController]
     public class SpotifyController : Controller
     {
-        #region Private Fields      
+        #region Private Fields     
+        IHttpClientFactory _httpClientFactory { get; set; }
         #endregion Private Fields
 
         #region Constructors
-        public SpotifyController()
-        {       
+        public SpotifyController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
         }
         #endregion Constructors
-        
+                
+        [HttpPost("GenerateRecommendedPlaylist")]
+        public ActionResult GenerateRecommendedPlaylist()
+        {      
+            //Remove recommended playlist from last week if it exists
 
+            //Create a new playlist
 
-        [HttpPost("GeneratePlaylist")]
-        public ActionResult GeneratePlaylist()
-        {
+            //Get Recommended Tracks
+
+            //Add Recommended Tracks to playlist
 
             return Ok();
         }

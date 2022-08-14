@@ -9,6 +9,7 @@ using System;
 using Serilog;
 using System.IO;
 using System.Reflection;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,13 @@ builder.Services.AddSwaggerGen(x =>
 });
 
 builder.Services.AddSwaggerGenNewtonsoftSupport();
+builder.Services.AddHttpClient("Spotify", client =>
+{
+    client.BaseAddress = new Uri("https://api.spotify.com/v1");
+});
+
+builder.Services.AddMediatR(typeof(Program));
+
 builder.Host.UseSerilog();
 
 
