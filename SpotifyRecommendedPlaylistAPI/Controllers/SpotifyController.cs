@@ -22,14 +22,20 @@ namespace SpotifyRecommendedPlaylistAPI.Controllers
                 
         [HttpPost("GenerateRecommendedPlaylist")]
         public ActionResult GenerateRecommendedPlaylist()
-        {      
+        {
             //Remove recommended playlist from last week if it exists
+            //Relevant Spotify Docs:
+            //Get User's Playlists - https://developer.spotify.com/documentation/web-api/reference/#/operations/get-list-users-playlists
+            //Delete Playlist - https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-playlist
 
             //Create a new playlist
+            //Relevant Spotify Doc: https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
 
             //Get Recommended Tracks
+            //Relevant Spotify Doc: https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendations
 
             //Add Recommended Tracks to playlist
+            //Relevant Spotify Doc: https://developer.spotify.com/documentation/web-api/reference/#/operations/add-tracks-to-playlist
 
             return Ok();
         }
